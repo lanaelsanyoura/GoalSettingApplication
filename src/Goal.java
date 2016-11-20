@@ -47,13 +47,18 @@ public class Goal {
 	public void addCheckIn(GoalCheckIn checkIn){
 		this.checkIns.add(checkIn);
 		int newProgress = 0;
-		if(checkIn.progress >= 100){
+		if(checkIn.getProgress() >= 100){
 			this.nextMileStone.setAcomplished(true);
 			for(MileStone m: this.mileStones){
 				if(m.acomplished){
 					newProgress += m.howFarYouHaveCome;
 				}
+				else{
+					this.nextMileStone = m;
+					break;
+				}
 			}
+			
 		}
 		else{
 			for(MileStone m: this.mileStones){
@@ -61,11 +66,15 @@ public class Goal {
 					newProgress += m.howFarYouHaveCome;
 				}
 				else{
-					newProgress += Math.round(m.howFarYouHaveCome*(checkIn.progress/100));
+					newProgress += Math.round(m.howFarYouHaveCome*(checkIn.getProgress()/100));
 					break;
 				}
 			}
 			this.progress = newProgress;
+		}
+		if(this.progress >= 100){
+			this.acomplished = true;
+			this.nextMileStone = null;
 		}
 	}
 	public LinkedList<MileStone> getMileStones() {
