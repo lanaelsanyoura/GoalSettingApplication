@@ -6,39 +6,67 @@ import com.sun.jmx.snmp.Timestamp;
 public class Goal {
 	private LinkedList<MileStone> mileStones = new LinkedList<MileStone>();
 	private ArrayList<GoalCheckIn> checkIns = new ArrayList<GoalCheckIn>();
+	private String name;
 	private String description;
 	private Timestamp start;
-	private MileStone nextCheckPoint;
+	private MileStone nextMileStone;
 	private Timestamp end;
-	private double progress;
+	private int progress;
+	boolean acomplished;
 	
 
-	public Goal(LinkedList<MileStone> mileStones, ArrayList<GoalCheckIn> checkIns, String description, Timestamp end, Timestamp start, double progress){
+	public Goal(LinkedList<MileStone> mileStones, ArrayList<GoalCheckIn> checkIns, String description, String name, Timestamp end, Timestamp start, int progress){
 
 		this.mileStones = mileStones;
 		this.checkIns = checkIns;
+		this.name = name;
 		this.description = description;
 		this.start = start;
 		this.end = end;
 		this.progress = 0;
 		if(mileStones.size() > 0){
-			this.nextCheckPoint = mileStones.get(0);
+			this.nextMileStone = mileStones.get(0);
 		}
+		acomplished = false;
 	}
 	public void addMileStone(int indexOfNewMileStone, MileStone newMileStone){
-		if(this.mileStones.get(indexOfNewMileStone) == nextCheckPoint){
-			nextCheckPoint = newMileStone;
+		if(nextMileStone == null){
+			nextMileStone = newMileStone;
+		}
+		else if(this.mileStones.get(indexOfNewMileStone) == nextMileStone){
+			nextMileStone = newMileStone;
 		}
 		this.mileStones.add(indexOfNewMileStone, newMileStone);
 	}
 	public void removeMileStone(int indexToRemove){
-		if(this.mileStones.get(indexToRemove) == nextCheckPoint){
-			nextCheckPoint = this.mileStones.get(indexToRemove + 1);
+		if(this.mileStones.get(indexToRemove) == nextMileStone){
+			nextMileStone = this.mileStones.get(indexToRemove + 1);
 		}
 		this.mileStones.remove(indexToRemove);
 	}
 	public void addCheckIn(GoalCheckIn checkIn){
 		this.checkIns.add(checkIn);
+		int newProgress = 0;
+		if(checkIn.progress >= 100){
+			this.nextMileStone.setAcomplished(true);
+			for(MileStone m: this.mileStones){
+				if(m.acomplished){
+					newProgress += m.howFarYouHaveCome;
+				}
+			}
+		}
+		else{
+			for(MileStone m: this.mileStones){
+				if(m.acomplished){
+					newProgress += m.howFarYouHaveCome;
+				}
+				else{
+					newProgress += Math.round(m.howFarYouHaveCome*(checkIn.progress/100));
+					break;
+				}
+			}
+			this.progress = newProgress;
+		}
 	}
 	public LinkedList<MileStone> getMileStones() {
 		return mileStones;
@@ -56,7 +84,7 @@ public class Goal {
 		return start;
 	}
 	public MileStone getNextCheckPoint() {
-		return nextCheckPoint;
+		return nextMileStone;
 	}
 	public Timestamp getEnd() {
 		return end;
@@ -67,8 +95,17 @@ public class Goal {
 	public double getProgress() {
 		return progress;
 	}
-	public void setProgress(double progress) {
+	public void setProgress(int progress) {
 		this.progress = progress;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public boolean isAcomplished() {
+		return acomplished;
 	}
 	
 }
