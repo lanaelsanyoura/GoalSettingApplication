@@ -53,7 +53,12 @@ public class Goal {
 				if(m.acomplished){
 					newProgress += m.howFarYouHaveCome;
 				}
+				else{
+					this.nextMileStone = m;
+					break;
+				}
 			}
+			
 		}
 		else{
 			for(MileStone m: this.mileStones){
@@ -66,6 +71,10 @@ public class Goal {
 				}
 			}
 			this.progress = newProgress;
+		}
+		if(this.progress >= 100){
+			this.acomplished = true;
+			this.nextMileStone = null;
 		}
 	}
 	public LinkedList<MileStone> getMileStones() {
