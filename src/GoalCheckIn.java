@@ -39,6 +39,7 @@ public class GoalCheckIn {
 		Double progPerHour = (double) (this.progress/this.hrs);
 		StringBuilder r = new StringBuilder();
 		r.append("On " + this.goal.getName() + ", you made: " + progPerHour.toString() + "% progress per hour");
+		return r.toString();
 	}
 }
 
