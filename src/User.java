@@ -10,8 +10,17 @@ public class User {
 	private File profileImage; 
 	private ArrayList<Goal> goals;
 	private ArrayList<checkIn> checkIns;
+	private String pwd;
 	
-	public User(String name, File image) {
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public User(String name, File image){
 		this.name = name;
 		this.goals = new ArrayList<Goal>();
 		this.checkIns = new ArrayList<>();

@@ -23,6 +23,9 @@ public class checkIn {
 	public void setMood(Integer mood) {
 		this.mood = mood;
 	}
+	public String getTimestamp() {
+		return timestamp.toString();
+	}
 	
 	public checkIn(Integer productivity, Integer mood){
 		this.timestamp = new Timestamp(System.currentTimeMillis());
