@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 import com.sun.jmx.snmp.Timestamp;
@@ -27,10 +28,11 @@ public class checkIn {
 		return timestamp.toString();
 	}
 	
-	public checkIn(Integer productivity, Integer mood){
+	public checkIn(Integer productivity, Integer mood, ArrayList<GoalCheckIn> goalCheckIns){
 		this.timestamp = new Timestamp(System.currentTimeMillis());
 		this.productivity = productivity;
 		this.mood = mood;
+		this.goalCheckIns = goalCheckIns;
 	}
 	
 	public String toString(){

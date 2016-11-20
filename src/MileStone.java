@@ -1,17 +1,19 @@
+import java.io.File;
+
 import com.sun.jmx.snmp.Timestamp;
 import com.sun.prism.Image;
 
 public class MileStone {
 	Timestamp time;
 	String description;
-	Image pic;
+	File pic;
 	boolean acomplished;
 	int howFarYouHaveCome;
-	public MileStone(Timestamp time, String description, Image pic, boolean acomplished, int howFarYouHaveCome) {
+	public MileStone(Timestamp time, String description, File pic, int howFarYouHaveCome) {
 		this.time = time;
 		this.description = description;
 		this.pic = pic;
-		this.acomplished = acomplished;
+		this.acomplished = false;
 		this.howFarYouHaveCome = howFarYouHaveCome;
 	}
 	public Timestamp getTime() {
@@ -26,10 +28,10 @@ public class MileStone {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Image getPic() {
+	public File getPic() {
 		return pic;
 	}
-	public void setPic(Image pic) {
+	public void setPic(File pic) {
 		this.pic = pic;
 	}
 	public boolean isAcomplished() {
@@ -44,5 +46,11 @@ public class MileStone {
 	public void setHowFarYouHaveCome(int howFarYouHaveCome) {
 		this.howFarYouHaveCome = howFarYouHaveCome;
 	}
+	@Override
+	public String toString() {
+		return "MileStone [time=" + time + ", description=" + description + ", pic=" + pic + ", acomplished="
+				+ acomplished + ", howFarYouHaveCome=" + howFarYouHaveCome + "]";
+	}
+	
 	
 }

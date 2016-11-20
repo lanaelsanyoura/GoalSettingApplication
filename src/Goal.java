@@ -15,7 +15,7 @@ public class Goal {
 	boolean acomplished;
 	
 
-	public Goal(LinkedList<MileStone> mileStones, ArrayList<GoalCheckIn> checkIns, String description, String name, Timestamp end, Timestamp start, int progress){
+	public Goal(LinkedList<MileStone> mileStones, String description, String name, Timestamp end, Timestamp start){
 
 		this.mileStones = mileStones;
 		this.checkIns = checkIns;
@@ -23,11 +23,18 @@ public class Goal {
 		this.description = description;
 		this.start = start;
 		this.end = end;
+
 		this.progress = 0;
 		if(mileStones.size() > 0){
 			this.nextMileStone = mileStones.get(0);
 		}
 		acomplished = false;
+	}
+	@Override
+	public String toString() {
+		return "Goal [mileStones=" + mileStones + ", checkIns=" + checkIns + ", name=" + name + ", description="
+				+ description + ", start=" + start + ", nextMileStone=" + nextMileStone + ", end=" + end + ", progress="
+				+ progress + ", acomplished=" + acomplished + "]";
 	}
 	public void addMileStone(int indexOfNewMileStone, MileStone newMileStone){
 		if(nextMileStone == null){
