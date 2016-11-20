@@ -1,4 +1,4 @@
-package src;
+//package src;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,11 +9,20 @@ public class User {
 	private String name;
 	private File profileImage; 
 	private ArrayList<Goal> goals;
-	private ArrayList<CheckIn> checkIns;
+	private ArrayList<checkIn> checkIns;
+	private String pwd;
 	
-	public User(String name, File image) {
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public User(String name, File image){
 		this.name = name;
-		this.goals = new ArrayList<Goal>;
+		this.goals = new ArrayList<Goal>();
 		this.checkIns = new ArrayList<>();
 		this.profileImage = image;
 	}
@@ -46,10 +55,10 @@ public class User {
 		this.goals.add(goal);
 	}
 
-	public ArrayList<CheckIn> getCheckIns() {
+	public ArrayList<checkIn> getCheckIns() {
 		return this.checkIns;
 	}
-	public void setCheckIns(ArrayList<CheckIn> checkIns) {
+	public void setCheckIns(ArrayList<checkIn> checkIns) {
 		this.checkIns = checkIns;
 	}
 }
