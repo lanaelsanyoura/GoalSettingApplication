@@ -12,7 +12,9 @@ public class Goal {
 	private Timestamp end;
 	private double progress;
 	
+
 	public Goal(LinkedList<MileStone> mileStones, ArrayList<GoalCheckIn> checkIns, String description, Timestamp end, Timestamp start, double progress){
+
 		this.mileStones = mileStones;
 		this.checkIns = checkIns;
 		this.description = description;
