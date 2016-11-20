@@ -11,7 +11,7 @@ public class Goal {
 	Timestamp end;
 	double progress;
 	
-	public Goal(Arraylist<MileStone> mileStones, ArrayList<CheckIns> checkIns, String description, Timestamp end, Timestamp start, double progress){
+	public Goal(ArrayList<MileStone> mileStones, ArrayList<CheckIns> checkIns, String description, Timestamp end, Timestamp start, double progress){
 		this.mileStones = mileStones;
 		this.checkIns = checkIns;
 		this.description = description;
