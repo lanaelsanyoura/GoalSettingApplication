@@ -1,8 +1,10 @@
+import java.util.List;
+
 import com.sun.jmx.snmp.Timestamp;
 
 public class checkIn {
 
-	private long timestamp;
+	private Timestamp timestamp;
 	//user rated productivity out of 10
 	private Integer productivity;
 	//user rated mood out of 10
@@ -23,7 +25,7 @@ public class checkIn {
 	}
 	
 	public checkIn(Integer productivity, Integer mood){
-		this.timestamp = Timestamp.getTime();
+		this.timestamp = new Timestamp(System.currentTimeMillis());
 		this.productivity = productivity;
 		this.mood = mood;
 	}
@@ -33,7 +35,7 @@ public class checkIn {
 		r.append("Overall Prodcutivity (out of 10): " + this.productivity);
 		r.append(System.getProperty("line.separator"));
 		r.append("Overall Mood (out of 10): " + this.mood);
-		for (GoalCheckIn GCI:goalCHeckIns){
+		for (GoalCheckIn GCI:goalCheckIns){
 			r.append(GCI.toString());
 			r.append(System.getProperty("line.separator"));
 		}
