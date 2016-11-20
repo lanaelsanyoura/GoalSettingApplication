@@ -34,10 +34,9 @@ public class checkIn {
 		r.append(System.getProperty("line.separator"));
 		r.append("Overall Mood (out of 10): " + this.mood);
 		for (GoalCheckIn GCI:goalCHeckIns){
-			r.append(toString(GCI));
+			r.append(GCI.toString());
 			r.append(System.getProperty("line.separator"));
 		}
 		return r.toString();		
 	}
-	
 }
