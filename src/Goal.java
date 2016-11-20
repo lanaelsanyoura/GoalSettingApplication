@@ -4,13 +4,13 @@ import java.util.LinkedList;
 import com.sun.jmx.snmp.Timestamp;
 
 public class Goal {
-	LinkedList<MileStone> mileStones = new LinkedList<MileStone>();
-	ArrayList<GoalCheckIn> checkIns = new ArrayList<GoalCheckIn>();
-	String description;
-	Timestamp start;
-	MileStone nextCheckPoint;
-	Timestamp end;
-	double progress;
+	private LinkedList<MileStone> mileStones = new LinkedList<MileStone>();
+	private ArrayList<GoalCheckIn> checkIns = new ArrayList<GoalCheckIn>();
+	private String description;
+	private Timestamp start;
+	private MileStone nextCheckPoint;
+	private Timestamp end;
+	private double progress;
 	
 	public Goal(LinkedList<MileStone> mileStones, ArrayList<GoalCheckIn> checkIns, String description, Timestamp end, Timestamp start, double progress){
 		this.mileStones = mileStones;
@@ -35,4 +35,38 @@ public class Goal {
 		}
 		this.mileStones.remove(indexToRemove);
 	}
+	public void addCheckIn(GoalCheckIn checkIn){
+		this.checkIns.add(checkIn);
+	}
+	public LinkedList<MileStone> getMileStones() {
+		return mileStones;
+	}
+	public ArrayList<GoalCheckIn> getCheckIns() {
+		return checkIns;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Timestamp getStart() {
+		return start;
+	}
+	public MileStone getNextCheckPoint() {
+		return nextCheckPoint;
+	}
+	public Timestamp getEnd() {
+		return end;
+	}
+	public void setEnd(Timestamp end) {
+		this.end = end;
+	}
+	public double getProgress() {
+		return progress;
+	}
+	public void setProgress(double progress) {
+		this.progress = progress;
+	}
+	
 }
