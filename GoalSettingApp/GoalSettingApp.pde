@@ -6,11 +6,9 @@ ControlP5 cp5;
 ControlP5 cp4;
 ControlP5 cp2;
 ControlP5 cp6;
-ControlP5 modal;
 Textfield goalTextField;
 Textfield password;
 Textfield userName;
-Textarea description; 
 PShape plus;
 String textValue = "";
 void setup() {
@@ -29,7 +27,6 @@ void setup() {
   cp5 = new ControlP5(this);
   cp4 = new ControlP5(this);
   cp6 = new ControlP5(this);
-  modal = new ControlP5(this);
 
   if (mode == 0) {
     cp6.hide();
@@ -74,28 +71,13 @@ void setup() {
      .setFont(createFont("arial",20))
      .setAutoClear(false)
      ;
-     
   cp5.addBang("signin")
      .setPosition(400,400)
      .setSize(70,30)
      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER)
      ;
-   description = modal.addTextarea("Goal Description")
-     .setPosition(400,350)
-     .setSize(200,200)
-     .setFont(createFont("arial",20))
-     ;
-  modal.addBang("upload")
-     .setPosition(400,400)
-     .setSize(70,30)
-     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER)
-     ;  
-     
-     
-     
-     
   textFont(font);
-  
+
 }
 void draw() {
   if (mode == 0) {
@@ -110,12 +92,8 @@ void draw() {
     rect(60, 75, 300, 500);
     
     fill(0,0,0);
-    if (system.modalIsOpen) {
-      system.drawModal();
-    }
-    noStroke();
+    //text("Your Goals", 100, 100);
     system.goalSetting();
-    
   }
     
 }
@@ -123,7 +101,6 @@ void draw() {
 class System {
   HashMap<String, User> nameTouser;
   User currentUser;
-  boolean modalIsOpen;
   System(){
     /*
     int[] white = {250, 250, 250};
@@ -131,7 +108,6 @@ class System {
     int[] darkPurple = {158,122,242}; */
     this.nameTouser = new HashMap<String, User>();
     currentUser = null;
-    this.modalIsOpen = false;
     
   }
   void signIn(){
@@ -145,23 +121,16 @@ class System {
     getGoal();
     
 }
-  void drawModal() {
-   if (this.modalIsOpen) {
-     stroke(67, 66, 232);
-     fill(250, 250, 250);
-     rect(400, 100, 400, 400);
-   }
-  }
   void openModal() {
-   modal.show();
- }
+    
+  }
 
  
   void getGoal() {
-    String [] goals  = currentUser.table.getStringColumn("Goal");
+    ArrayList<Goal> goals = currentUser.getGoals();
     String goalBuffer = "";
-     for (String goal: goals) {
-       goalBuffer += goal;
+     for (Goal goal: goals) {
+       goalBuffer += goal.toString();
      }
      textSize(20);
      text(goalBuffer, 100, 200); 
@@ -182,13 +151,10 @@ class System {
 */
  public void addGoal() {
    String newGoal = goalTextField.getText();
-   TableRow newRow = system.currentUser.table.addRow();
-    newRow.setString("Goal",newGoal);
-    saveTable(system.currentUser.table, "data/new.csv");
-   system.openModal(); 
-   system.modalIsOpen = true;
+   //TableRow newRow = system.currentUser.table.addRow();
+    //newRow.setString("Goal",newGoal);
+    //saveTable(system.currentUser.table, "data/new.csv");
  }
-
 
 
 public void clear() {
@@ -201,12 +167,12 @@ public void signin() {
     cp4.hide();
     cp5.hide();
     cp6.show();
-    modal.hide();
-    system.currentUser = new User(username, pwd, null);
+    system.currentUser = new User(username,  null, pwd);
     mode = 1; 
     
    
   }
+
 
 public void input(String theText) {
   // automatically receives results from controller input
